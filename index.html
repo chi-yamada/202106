@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.79.0">
+  <title>大亜電子株式会社</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/carousel/">
+  <script src="https://kit.fontawesome.com/c82e128be6.js" crossorigin="anonymous"></script>
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/remodal/1.0.5/remodal.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/remodal/1.0.5/remodal-default-theme.min.css">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/remodal/1.0.5/remodal.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
+  </style>
+  <script>
+  jQuery(function(){
+    var windowWidth = $(window).width();
+    var headerHight = 180;
+        $("#topBtn").hide();
+    $(window).on("scroll", function() {
+        if ($(this).scrollTop() > 100) {
+            $("#topBtn").fadeIn("fast");
+        } else {
+            $("#topBtn").fadeOut("fast");
+        }
+        scrollHeight = $(document).height(); //ドキュメントの高さ
+        scrollPosition = $(window).height() + $(window).scrollTop(); //現在地
+        footHeight = $("footer").innerHeight(); //footerの高さ（＝止めたい位置）
+        if ( scrollHeight - scrollPosition  <= footHeight ) { //ドキュメントの高さと現在地の差がfooterの高さ以下になったら
+            $("#page_top").css({
+                "position":"absolute", //pisitionをabsolute（親：wrapperからの絶対値）に変更
+                "bottom": footHeight + 20 //下からfooterの高さ + 20px上げた位置に配置
+            });
+        } else { //それ以外の場合は
+            $("#page_top").css({
+                "position":"fixed", //固定表示
+                "bottom": "20px" //下から20px上げた位置に
+            });
+        }
+    });
+    var pagetop = $('#page_top');
+    pagetop.hide();
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 100) {  //100pxスクロールしたら表示
+            pagetop.fadeIn();
+        } else {
+            pagetop.fadeOut();
+        }
+    });
+    jQuery('a[href^=#]').click(function() {
+      var speed = 1000;
+      var href= jQuery(this).attr("href");
+      var target = jQuery(href == "#" || href == "" ? 'html' : href);
+      var position = target.offset().top-headerHight;
+      jQuery('body,html').animate({scrollTop:position}, speed, 'swing');
+      return false;
+    });
+  });
+</script>
+<!-- Custom styles for this template -->
+<link href="carousel.css" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img src="./img/logo.gif" width="28px" height="28px">&ensp;大亜電子株式会社</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="#PDF">PDF</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#company_info">会社概要</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#business_content">事業内容</a>
+            </li>
+          </ul>
+
+            <!-- お問い合せボタン-->
+          <a class="btn btn-secondary nav_inquiry" href="contact/contact.php" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
+              <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z"/>
+            </svg>&ensp;お問い合わせ</a>
+
+          <!-- <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form> -->
+      </div>
+    </div>
+  </nav>
+
+  <!-- <nav id="nav-wrap">
+  <a class="mobile-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
+  <a class="mobile-btn" href="#" title="Hide navigation">Hide navigation</a>
+
+  <ul id="nav" class="nav">
+  <li class="current"><a class="smoothscroll" href="#home">TOP</a></li>
+  <li><a class="smoothscroll" href="#PDF">&ensp;PDF&ensp;</a></li>
+  <li><a class="smoothscroll" href="#company_info">&ensp;会社概要&ensp;</a></li>
+  <li><a class="smoothscroll" href="#business_content">&ensp;事業内容&ensp;</a></li>
+</ul>
+</nav>
+
+<p class="scrolldown">
+<a class="smoothscroll" href="#design"><i class="icon-down-circle"></i></a></p> -->
+
+</header>
+
+<main>
+
+  <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"></li>
+      <!-- <li data-bs-target="#myCarousel" data-bs-slide-to="1"></li>
+      <li data-bs-target="#myCarousel" data-bs-slide-to="2"></li> -->
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active" id="home">
+        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="none"/></svg>
+
+        <div class="container">
+          <div class="carousel-caption text-start">
+            <h1>大亜電子株式会社</h1>
+            <dl>
+              <dt><img src="./img/ISMS.jpg" height="30px"></dt>
+              <dd>&ensp;IS 562549</dd>
+              <dt>一般労働者派遣事業許可番号</dt>
+              <dd>&ensp;派40-301159</dd>
+              <!-- <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p> -->
+            </div>
+          </div>
+          <!-- Topへ戻るボタン -->
+          <div id="page_top">
+            <p><a class="btn btn-secondary" href="#" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-up" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M7.646 2.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 3.707 2.354 9.354a.5.5 0 1 1-.708-.708l6-6z"/>
+  <path fill-rule="evenodd" d="M7.646 6.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 7.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
+</svg></a></p>
+          </div>
+        </div>
+        <!--      <div class="carousel-item">
+        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
+
+        <div class="container">
+        <div class="carousel-caption">
+        <h1>Another example headline.</h1>
+        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+        <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="carousel-item">
+  <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
+
+  <div class="container">
+  <div class="carousel-caption text-end">
+  <h1>One more for good measure.</h1>
+  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+  <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
+</div>
+</div>
+</div>-->
+</div>
+<a class="carousel-control-prev" href="#myCarousel" role="button" data-bs-slide="prev">
+  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+  <span class="visually-hidden">Previous</span>
+</a>
+<a class="carousel-control-next" href="#myCarousel" role="button" data-bs-slide="next">
+  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+  <span class="visually-hidden">Next</span>
+</a>
+</div>
+
+
+<!-- Marketing messaging and featurettes
+================================================== -->
+<!-- Wrap the rest of the page in another container to center all the content. -->
+
+<div class="container marketing">
+
+  <!-- Three columns of text below the carousel -->
+  <div class="row" id="PDF">
+    <div class="col">
+      <!-- <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg> -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" fill="#777" class="bi bi-file-earmark-lock2-fill" viewBox="0 0 16 16">
+        <path d="M7 7a1 1 0 0 1 2 0v1H7V7z"/><path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM10 7v1.076c.54.166 1 .597 1 1.224v2.4c0 .816-.781 1.3-1.5 1.3h-3c-.719 0-1.5-.484-1.5-1.3V9.3c0-.627.46-1.058 1-1.224V7a2 2 0 1 1 4 0z"/>
+      </svg>
+      <h2>情報セキュリティ<br>基本方針</h2>
+      <!-- <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p> -->
+      <section>
+        <p><a class="btn btn-secondary" href="#modal_pdf_1" role="button">View details <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
+  <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
+</svg></a></p>
+        <div class="remodal modal-dialog-fluid" data-remodal-id="modal_pdf_1">
+          <object data="./img/pdf/情報セキュリティ基本方針.pdf#view=FitH" type="application/pdf" height="90%" width="100%">
+          </object>
+          <button data-remodal-action="cancel" class="remodal-cancel remodal-cancel_pdf">閉じる</button>
+        </div>
+      </section>
+    </div><!-- /.col -->
+
+    <div class="col">
+      <!-- <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg> -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" fill="#777" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+      </svg>
+      <h2>ISMS認証書</h2>
+      <!-- <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p> -->
+      <section>
+        <p><a class="btn btn-secondary" href="#modal_pdf_2" role="button">View details <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
+  <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
+</svg></a></p>
+        <div class="remodal modal-dialog-fluid" data-remodal-id="modal_pdf_2">
+          <object data="img\pdf\ISMS 認証書.pdf#view=FitH" type="application/pdf" height="90%" width="100%">
+          </object>
+          <button data-remodal-action="cancel" class="remodal-cancel remodal-cancel_pdf">閉じる</button>
+        </div>
+      </section>
+    </div><!-- /.col -->
+
+    <div class="col">
+      <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" fill="#777" class="bi bi-shield-lock-fill" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M8 0c-.69 0-1.843.265-2.928.56-1.11.3-2.229.655-2.887.87a1.54 1.54 0 0 0-1.044 1.262c-.596 4.477.787 7.795 2.465 9.99a11.777 11.777 0 0 0 2.517 2.453c.386.273.744.482 1.048.625.28.132.581.24.829.24s.548-.108.829-.24a7.159 7.159 0 0 0 1.048-.625 11.775 11.775 0 0 0 2.517-2.453c1.678-2.195 3.061-5.513 2.465-9.99a1.541 1.541 0 0 0-1.044-1.263 62.467 62.467 0 0 0-2.887-.87C9.843.266 8.69 0 8 0zm0 5a1.5 1.5 0 0 1 .5 2.915l.385 1.99a.5.5 0 0 1-.491.595h-.788a.5.5 0 0 1-.49-.595l.384-1.99A1.5 1.5 0 0 1 8 5z"/>
+      </svg>
+      <!-- <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg> -->
+      <h2>個人情報保護方針</h2>
+      <!-- <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p> -->
+      <section>
+        <p><a class="btn btn-secondary" href="#modal_pdf_3" role="button">View details <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
+  <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
+</svg></a></p>
+        <div class="remodal modal-dialog-fluid" data-remodal-id="modal_pdf_3">
+          <object data="img\pdf\個人情報保護方針.pdf#view=FitH" type="application/pdf" height="90%" width="100%">
+          </object>
+          <button data-remodal-action="cancel" class="remodal-cancel remodal-cancel_pdf">閉じる</button>
+        </div>
+      </section>
+    </div><!-- /.col -->
+
+    <div class="col">
+      <!-- <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg> -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" fill="#777" class="bi bi-briefcase-fill" viewBox="0 0 16 16">
+        <path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v1.384l7.614 2.03a1.5 1.5 0 0 0 .772 0L16 5.884V4.5A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1h-3zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5z"/><path d="M0 12.5A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5V6.85L8.129 8.947a.5.5 0 0 1-.258 0L0 6.85v5.65z"/>
+      </svg>
+      <h2>労働者派遣事業に関する情報公開について</h2>
+      <!-- <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p> -->
+      <section>
+        <p><a class="btn btn-secondary" href="#modal_pdf_4" role="button">View details <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
+  <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
+</svg></a></p>
+        <div class="remodal modal-dialog-fluid" data-remodal-id="modal_pdf_4">
+          <object data="img\pdf\労働者派遣事業に関する情報公開.pdf#view=FitH" type="application/pdf" height="90%" width="100%">
+          </object>
+          <button data-remodal-action="cancel" class="remodal-cancel remodal-cancel_pdf">閉じる</button>
+        </div>
+      </section>
+    </div><!-- /.col -->
+
+    <div class="col">
+      <!-- <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg> -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" fill="#777" class="bi bi-inbox-fill" viewBox="0 0 16 16">
+        <path d="M4.98 4a.5.5 0 0 0-.39.188L1.54 8H6a.5.5 0 0 1 .5.5 1.5 1.5 0 1 0 3 0A.5.5 0 0 1 10 8h4.46l-3.05-3.812A.5.5 0 0 0 11.02 4H4.98zm-1.17-.437A1.5 1.5 0 0 1 4.98 3h6.04a1.5 1.5 0 0 1 1.17.563l3.7 4.625a.5.5 0 0 1 .106.374l-.39 3.124A1.5 1.5 0 0 1 14.117 13H1.883a1.5 1.5 0 0 1-1.489-1.314l-.39-3.124a.5.5 0 0 1 .106-.374l3.7-4.625z"/>
+      </svg>
+      <h2>派遣事業許可証</h2>
+      <!-- <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p> -->
+      <section>
+        <p><a class="btn btn-secondary" href="#modal_pdf_5" role="button">View details <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
+  <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
+</svg></a></p>
+        <div class="remodal modal-dialog-fluid" data-remodal-id="modal_pdf_5">
+          <object data="img\pdf\労働者派遣事業許可証.pdf#view=FitH" type="application/pdf" height="90%" width="100%">
+          </object>
+          <button data-remodal-action="cancel" class="remodal-cancel remodal-cancel_pdf">閉じる</button>
+        </div>
+      </section>
+    </div><!-- /.col -->
+  </div><!-- /.row -->
+
+  <!-- 会社概要 -->
+  <h2 class="head-border">会社概要</h2>
+
+  <div class="row featurette" id="company_info">
+    <div class="col-md-7 order-md-2">
+      <!-- <h2 class="featurette-heading">会社概要 <span class="text-muted">See for yourself</span> </h2> -->
+      <p class="lead">
+        <dl>
+          <dt>社名</dt>
+          <dd><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grip-vertical" viewBox="0 0 16 16"><path d="M7 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-3 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-3 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg>
+            &emsp;大亜電子株式会社</dd>
+          <dt>所在地</dt>
+          <dd><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grip-vertical" viewBox="0 0 16 16"><path d="M7 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-3 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-3 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg>
+              &emsp;〒819-0052<br>&emsp;&emsp;福岡市西区下山門1丁目19－8番703号</dd>
+          <dt>TEL</dt>
+          <dd><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grip-vertical" viewBox="0 0 16 16"><path d="M7 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-3 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-3 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg>
+                &emsp;092-882-7688</dd>
+          <dt>FAX</dt>
+          <dd><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grip-vertical" viewBox="0 0 16 16"><path d="M7 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-3 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-3 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg>
+                  &emsp;092-210-3456</dd>
+          <dt>Mail</dt>
+          <dd><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grip-vertical" viewBox="0 0 16 16"><path d="M7 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-3 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-3 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg>
+                    &emsp;info@dia-electron.co.jp</dd>
+          <dt>設立</dt>
+          <dd><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grip-vertical" viewBox="0 0 16 16"><path d="M7 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-3 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-3 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg>
+                      &emsp;平成19年4月2日</dd>
+          <dt>資本金</dt>
+          <dd><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grip-vertical" viewBox="0 0 16 16"><path d="M7 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-3 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-3 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg>
+                        &emsp;1,200万円</dd>
+          <dt>代表取締役</dt>
+          <dd><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grip-vertical" viewBox="0 0 16 16"><path d="M7 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-3 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-3 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg>
+                          &emsp;有吉&ensp;泉</dd>
+          <dt>従業員数</dt>
+          <dd><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grip-vertical" viewBox="0 0 16 16"><path d="M7 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-3 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-3 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg>
+                            &emsp;20名</dd>
+          <dt>取引先銀行</dt>
+          <dd><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grip-vertical" viewBox="0 0 16 16"><path d="M7 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-3 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-3 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg>
+                              &emsp;福岡銀行・西日本シティ銀行</dd>
+        </dl>
+    <!-- お問い合せボタン-->
+      <a class="btn btn-secondary company_info_inquiry" href="contact/contact.php" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
+        <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z"/>
+          </svg>&ensp;お問い合わせ</a>
+      </p>
+    </div>
+    <div class="col-md-5 order-md-1 company_info">
+      <img src="./img/overview.jpg" width="100%"></img>
+      <!-- <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg> -->
+    </div>
+  </div>
+
+  <!-- 事業内容 -->
+  <h2 class="head-border">事業内容</h2>
+  <div class="row featurette" id="business_content">
+    <div class="col-md-7">
+      <h2 class="featurette-heading">制御システム <!-- <span class="text-muted">It’ll blow your mind.</span> --> </h2>
+      <p class="lead">携帯電話やＬＡＮ・無線ＬＡＮ製品などの通信システム、<br>高速道路監視システムや、画像処理装置などの映像処理システム、<br>ＣＤ／ＤＶＤドライブ製品などのストレージデバイスにかかわる<br>システム開発実績を多数積んできています。<br>これらの実績から生まれた要素開発技術力を活かし総合力でお応えします。</p>
+      <section>
+        <p><a class="btn btn-secondary" href="#modal_controll_system" role="button">View details <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
+  <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
+</svg></a></p>
+        <div class="remodal" data-remodal-id="modal_controll_system">
+          <div class="m_image"><img src="./img/control_system.jpg" height="100px"></div>
+          <div id="m_business_content">
+            <dl>
+              <dt>通信システム</dt>
+              <dd>局用交換機・ＰＢＸ及び保守運用端末開発<br>携帯電話開発 ＬＡＮ・無線ＬＡＮ製品開発</dd>
+              <dt>その他</dt>
+              <dd>プリンタ製品開発<br>CD/DVDドライブなどのストレージデバイス製品開発<br>高速道路監視システム開発<br>各種ハードウェアのドライバ・試験装置開発<br>各種製品の遠隔制御システム開発</dd>
+            </dl>
+          </div>
+          <button data-remodal-action="cancel" class="remodal-cancel">閉じる</button>
+        </div>
+      </section>
+    </div>
+    <div class="col-md-5">
+      <img src="./img/control_system.jpg" width="100%"></img>
+      <!-- <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg> -->
+    </div>
+
+  <hr class="featurette-divider">
+
+  <div class="row featurette">
+    <div class="col-md-7 order-md-2">
+      <h2 class="featurette-heading">業務アプリケーション <!-- <span class="text-muted">See for yourself.</span> --> </h2>
+      <p class="lead">企業では、日々さまざまな業務活動が行われています。<br>これらの生産・購買・売買・営業・顧客などITを使ってより効率的に、<br>省力化・合理化するための業務アプリケーションの構築を行います。<br>多数の開発実績により、これらを実現します。</p>
+      <section>
+        <p><a class="btn btn-secondary" href="#modal_business_application" role="button">View details <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
+  <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
+</svg></a></p>
+        <div class="remodal" data-remodal-id="modal_business_application">
+          <div  class="m_image"><img src="./img/business_application.jpg"></div>
+          <div id="m_business_content">
+            <dl>
+              <dt>医療</dt>
+              <dd>医療向けシステム開発<br>（院内ネットワーク、レントゲンフィルム管理システム）</dd>
+              <dt>教育</dt>
+              <dd>学校・教育機関向けネットワーク<br>アプリケーション開発</dd>
+              <dt>金融</dt>
+              <dd>銀行向けテレホンバンキングシステム開発</dd>
+              <dt>物流</dt>
+              <dd>貿易管理システム開発<br>量販店向け販売管理システム開発<br>Windows CE Handy機を用いたシステム開発<br>RFIDを使用した物流・防犯システム構築</dd>
+              <dt>人事・給与</dt>
+              <dd>人事給与・顧客管理システム開発</dd>
+              <dt>生産管理（SCM）</dt>
+              <dd>生産管理システム開発</dd>
+              <dt>ERP（エンタープライズリソースマネジメント）</dt>
+              <dd>ERP導入コンサルティング</dd>
+            </dl>
+          </div>
+          <button data-remodal-action="cancel" class="remodal-cancel">閉じる</button>
+        </div>
+      </section>
+    </div>
+    <div class="col-md-5 order-md-1">
+      <img src="./img/business_application.jpg" width="100%"></img>
+      <!-- <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg> -->
+    </div>
+  </div>
+
+  <hr class="featurette-divider">
+
+  <div class="row featurette">
+    <div class="col-md-7">
+      <h2 class="featurette-heading">ネットワーク <!-- <span class="text-muted">Checkmate.</span> --></h2>
+      <p class="lead">ネットワークの構築や導入支援。<br>お客さまの信頼に基づく確かな技術と実績で、<br>ネットワークサービスを通じた多彩なビジネスソリューションを提供しています。</p>
+      <section>
+        <p><a class="btn btn-secondary" href="#modal_network" role="button">View details <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
+  <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
+</svg></a></p>
+        <div class="remodal" data-remodal-id="modal_network">
+          <div  class="m_image"><img src="./img/network.jpg" height="100px"></div>
+          <div id="m_business_content">
+            <dl>
+              <dt>サーバー構築</dt>
+              <dd>サーバー構築と導入</dd>
+              <dt>ネットワーク構築</dt>
+              <dd>ネットワーク機器の選定と設置・設定</dd>
+            </dl>
+          </div>
+          <button data-remodal-action="cancel" class="remodal-cancel">閉じる</button>
+        </div>
+      </section>
+    </div>
+    <div class="col-md-5">
+      <img src="./img/network.jpg" width="100%"></img>
+      <!-- <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg> -->
+    </div>
+  </div>
+
+  <hr class="featurette-divider">
+
+  <div class="row featurette">
+    <div class="col-md-7 order-md-2">
+      <h2 class="featurette-heading">ソリューション <!-- <span class="text-muted">See for yourself.</span> --> </h2>
+      <p class="lead">最先端のIT（情報技術）を駆使し、<br>高品質かつ柔軟性・拡張性に富んだ未来価値のあるシステムを構築することで<br>顧客に最適なソリューションを提供します。</p>
+      <section>
+        <p><a class="btn btn-secondary" href="#modal_solution" role="button">View details <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
+  <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
+</svg></a></p>
+        <div class="remodal" data-remodal-id="modal_solution">
+          <div  class="m_image"><img src="./img/solution.jpg" height="100px"></div>
+          <div id="m_business_content">
+            <dl>
+              <dt>営業支援システム</dt>
+              <dd>販売促進、リードセールスを目的とした戦略的ITツールの作成</dd>
+              <dt>システム評価</dt>
+              <dd>情報システム評価</dd>
+              <dt>システム導入支援</dt>
+              <dd>エンドユーザーへのシステム提案<br>システム構築からユーザー教育、保守運用サービス</dd>
+              <dt>ホームページ構築</dt>
+              <dd>WEBデザイン<br>ホームページ製作</dd>
+            </dl>
+          </div>
+          <button data-remodal-action="cancel" class="remodal-cancel">閉じる</button>
+        </div>
+      </section>
+    </div>
+    <div class="col-md-5 order-md-1">
+      <img src="./img/solution.jpg" width="100%"></img>
+      <!-- <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg> -->
+    </div>
+  </div>
+  <!-- /END THE FEATURETTES -->
+</div><!-- /.container -->
+</main>
+<!-- FOOTER -->
+<footer>
+  <p>Copyright (C) 2007-2021 dia-electron Co., Ltd. All Rights Reserved.</p>
+</footer>
+<script src="assets/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -17,9 +17,7 @@ p.error, span.error {
   margin-right: 25px;
 }
 
-.nav_inquiry {
-  display: none;
-}
+
 
 /* フォーム要素（Bootstrap4 のスタイルを上書き） */
 .form-control {
